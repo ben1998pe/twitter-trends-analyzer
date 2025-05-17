@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>📈 Tendencias de Twitter - Perú</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        form { margin-bottom: 20px; }
+        input[type="text"] { padding: 6px; width: 250px; margin-right: 10px; }
+        input[type="submit"] { padding: 6px 12px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; }
+        th, td { padding: 8px 12px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #f5f5f5; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        img { margin-top: 30px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>📊 Tendencias de Twitter - Perú</h1>
+
+    <form method="get" action="/">
+        <input type="text" name="busqueda" placeholder="Buscar tendencia..." value="{{ busqueda }}">
+        <input type="text" name="fecha" placeholder="Filtrar por fecha (YYYY-MM-DD)" value="{{ fecha }}">
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha y hora</th>
+                <th>Tendencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row["Fecha y hora"] }}</td>
+                <td>{{ row["Tendencia"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if grafico %}
+    <h2>📊 Top 10 tendencias más repetidas</h2>
+    <img src="data:image/png;base64,{{ grafico }}" alt="Gráfico de tendencias">
+    {% endif %}
+</body>
+</html>
